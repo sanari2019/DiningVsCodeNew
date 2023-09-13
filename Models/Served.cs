@@ -5,13 +5,13 @@ namespace DiningVsCodeNew
 {
 
     public class Served
-{
-    public int Id { get; set; }
-    public int paymentMainId { get; set; }
-    public PaymentMain paymentMain { get; set; }
-    public DateTime Dateserved { get; set; }
-    public int ServedBy { get; set; }
-    public bool isServed { get; set; }
-}
+    {
+        public int Id { get; set; }
+        public int paymentMainId { get; set; }
+        public PaymentMain paymentMain { get; set; }
+        public DateTime Dateserved { get; set; }
+        public int ServedBy { get; set; }
+        public bool isServed { get; set; }
+    }
 
 }
