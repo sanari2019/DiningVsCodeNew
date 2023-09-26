@@ -32,6 +32,8 @@ builder.Services.AddAuthentication(opt =>
     });
 builder.Services.AddControllers();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddScoped<ISieveProcessor, SieveProcessor>();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -54,9 +56,13 @@ builder.Services.AddSingleton<OrderedMealRepository>();
 builder.Services.AddSingleton<OnlinePaymentRepository>();
 builder.Services.AddSingleton<ServedRepository>();
 builder.Services.AddSingleton<CustomerRouteRepository>();
+<<<<<<< HEAD
 builder.Services.AddSingleton<MealtariffRepository>();
 builder.Services.AddSingleton<SieveProcessor>();
 builder.Services.AddScoped<ISieveProcessor, SieveProcessor>();
+=======
+builder.Services.AddSingleton<SieveProcessor>();
+>>>>>>> 7a97e75b7c41694e461d645fff86dfcc33382717
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
