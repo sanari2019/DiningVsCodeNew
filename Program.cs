@@ -1,4 +1,9 @@
 using DiningVsCodeNew;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Sieve.Models;
+using Sieve.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +12,24 @@ var emailConfig = builder.Configuration
         .GetSection("EmailConfiguration")
         .Get<EmailConfiguration>();
 builder.Services.AddSingleton(emailConfig);
+builder.Services.AddAuthentication(opt =>
+{
+    opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = "https://localhost:7146",
+            ValidAudience = "https://localhost:7146",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+        };
+    });
 builder.Services.AddControllers();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -32,6 +55,8 @@ builder.Services.AddSingleton<OnlinePaymentRepository>();
 builder.Services.AddSingleton<ServedRepository>();
 builder.Services.AddSingleton<CustomerRouteRepository>();
 builder.Services.AddSingleton<MealtariffRepository>();
+builder.Services.AddSingleton<SieveProcessor>();
+builder.Services.AddScoped<ISieveProcessor, SieveProcessor>();
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {
@@ -60,7 +85,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("EnableCORS");
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

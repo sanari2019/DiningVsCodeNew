@@ -51,6 +51,26 @@ public class ServedController : ControllerBase
         return new OkObjectResult(repserv.GetServed(id));
 
     }
+    // [HttpGet("getHistoryRecords/{ServedBy}")]
+    // public IActionResult GetHistoryRecords(int ServedBy)
+    // {
+    //     try
+    //     {
+    //         var historyRecords = repserv.GetHistoryRecords(ServedBy);
+
+    //         if (historyRecords == null)
+    //         {
+    //             return NotFound(); // Return a 404 Not Found response if no records are found
+    //         }
+
+    //         return Ok(historyRecords); // Return a 200 OK response with the history records
+    //     }
+    //     catch (Exception ex)
+    //     {
+    //         // Handle any exceptions or errors here
+    //         return StatusCode(500, $"Internal Server Error: {ex.Message}");
+    //     }
+    // }
 
 
     [HttpPost("{id}")]

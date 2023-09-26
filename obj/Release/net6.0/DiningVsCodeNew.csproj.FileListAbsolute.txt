@@ -82,6 +82,7 @@ C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Release\net6.0\pu
 C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Release\net6.0\publish\appsettings.json
 C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Release\net6.0\publish\DiningVsCodeNew.deps.json
 C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Release\net6.0\publish\DiningVsCodeNew.runtimeconfig.json
+<<<<<<< HEAD
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Release\net6.0\appsettings.Development.json
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Release\net6.0\appsettings.json
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Release\net6.0\DiningVsCodeNew.exe
@@ -166,3 +167,12 @@ C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\obj\Rele
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\obj\Release\net6.0\DiningVsCodeNew.pdb
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\obj\Release\net6.0\DiningVsCodeNew.genruntimeconfig.cache
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\obj\Release\net6.0\ref\DiningVsCodeNew.dll
+=======
+C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Release\net6.0\publish\publish\web.config
+C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Release\net6.0\publish\publish\appsettings.Development.json
+C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Release\net6.0\publish\publish\appsettings.json
+C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Release\net6.0\publish\publish\DiningVsCodeNew.deps.json
+C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Release\net6.0\publish\publish\DiningVsCodeNew.runtimeconfig.json
+>>>>>>> d1d611de4491d09b3979748e59a366da524225ce
+C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Release\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Release\net6.0\Sieve.dll

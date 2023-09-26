@@ -87,13 +87,9 @@ C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Debug\net6.0\publ
 C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Debug\net6.0\publish\publish\appsettings.json
 C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Debug\net6.0\publish\publish\DiningVsCodeNew.deps.json
 C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Debug\net6.0\publish\publish\DiningVsCodeNew.runtimeconfig.json
+<<<<<<< HEAD
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\appsettings.json
-C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\publish\web.config
-C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\publish\appsettings.Development.json
-C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\publish\appsettings.json
-C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\publish\DiningVsCodeNew.deps.json
-C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\publish\DiningVsCodeNew.runtimeconfig.json
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\DiningVsCodeNew.exe
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\DiningVsCodeNew.deps.json
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\DiningVsCodeNew.runtimeconfig.json
@@ -176,3 +172,19 @@ C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\obj\Debu
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\obj\Debug\net6.0\DiningVsCodeNew.pdb
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\obj\Debug\net6.0\DiningVsCodeNew.genruntimeconfig.cache
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\obj\Debug\net6.0\ref\DiningVsCodeNew.dll
+=======
+C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Debug\net6.0\publish\publish\publish\web.config
+C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Debug\net6.0\publish\publish\publish\appsettings.Development.json
+C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Debug\net6.0\publish\publish\publish\appsettings.json
+C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Debug\net6.0\publish\publish\publish\DiningVsCodeNew.deps.json
+C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Debug\net6.0\publish\publish\publish\DiningVsCodeNew.runtimeconfig.json
+C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Debug\net6.0\Sieve.dll
+C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+>>>>>>> d1d611de4491d09b3979748e59a366da524225ce
+C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\Sieve.dll
+C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\publish\web.config
+C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\publish\appsettings.Development.json
+C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\publish\appsettings.json
+C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\publish\DiningVsCodeNew.deps.json
+C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Debug\net6.0\publish\DiningVsCodeNew.runtimeconfig.json

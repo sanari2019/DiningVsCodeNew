@@ -18,20 +18,7 @@ public class PaymentModeController : ControllerBase
         {
              return new OkObjectResult(repPymtMode.GetPaymentModes());
         }
-        // GET: api/Cities/5
-        [HttpGet("{id}")]
-        //public async Task<ActionResult<User>> GetUser(int id)
-       // {
-           // var user = await repuser.getUsers(id);
-           // if (user == null)
-           // {
-              //  return NotFound();
-           // }
-          //  return user;
-       // }
-        // PUT: api/users/5
-        // To protect from overposting attacks, see https://go.microsoft.com/
-        // fwlink/?linkid=2123754
+        
         [HttpPut("{id}")]
         public async Task<IActionResult> PutPymtMode(int id, PaymentMode pymtMode)
         {

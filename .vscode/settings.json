@@ -1,3 +1,6 @@
 {
-    "dotnet.defaultSolution": "DiningVsCodeNew.sln"
+    "dotnet.defaultSolution": "DiningVsCodeNew.sln",
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "Dining-local"
+    ]
 }

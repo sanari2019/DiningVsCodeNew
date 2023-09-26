@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using DiningVsCodeNew;
+using Sieve.Models;
+using Sieve.Services;
 
 namespace DiningVsCodeNew.Controllers;
 
@@ -8,9 +10,12 @@ namespace DiningVsCodeNew.Controllers;
 public class PaymentMainController : ControllerBase
 {
     PaymentMainRepository RepPymtMain;
-    public PaymentMainController(PaymentMainRepository repPymtMain)
+
+    SieveProcessor _sieveProcessor;
+    public PaymentMainController(PaymentMainRepository repPymtMain, SieveProcessor sieveProcessor)
     {
         this.RepPymtMain = repPymtMain;
+        this._sieveProcessor = sieveProcessor;
     }
     // GET: api/Cities
     [HttpGet]
@@ -18,10 +23,37 @@ public class PaymentMainController : ControllerBase
     {
         return RepPymtMain.GetPymtMains();
     }
+    // [HttpGet("getpaidpymts")]
+    // public async Task<ActionResult<IEnumerable<PaymentByCust>>> GetPaidPayments()
+    // {
+    //     return RepPymtMain.GetPaidPymts();
+    // }
     [HttpGet("getpaidpymts")]
-    public async Task<ActionResult<IEnumerable<PaymentByCust>>> GetPaidPayments()
+
+    public IActionResult GetPaidPayments([FromQuery] SieveModel sieveModel)
+
     {
-        return RepPymtMain.GetPaidPymts();
+
+
+        IQueryable paidpymts;
+
+        // paidpymts = RepPymtMain.GetPaidPymts();
+
+        paidpymts = _sieveProcessor.Apply<PaymentByCust>(sieveModel, RepPymtMain.GetPaidPymts());
+
+        return Ok(paidpymts);
+
+    }
+
+    [HttpGet("getpaidspymts")]
+    public IActionResult GetPaidsPayments([FromQuery] string custCodeFilter)
+
+    {
+
+
+        var paidPymts = RepPymtMain.GetPaidsPymts(custCodeFilter);
+        return Ok(paidPymts);
+
     }
     [HttpPost("getpaidpymtsbyCust")]
     public async Task<ActionResult<IEnumerable<PaymentMain>>> GetPaidPaymentsbyCust([FromBody] User us)

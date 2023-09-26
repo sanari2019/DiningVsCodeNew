@@ -12,6 +12,7 @@ C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\System.Net.Http.Formatting.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\System.Web.Http.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\System.Web.Http.Cors.dll
+C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\Microsoft.Data.SqlClient.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\Microsoft.Extensions.Configuration.dll
@@ -32,6 +33,7 @@ C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\RepoDb.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\RepoDb.SqlServer.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\RepoDb.SqlServer.BulkOperations.dll
+C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\Sieve.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\Swashbuckle.AspNetCore.SwaggerUI.dll

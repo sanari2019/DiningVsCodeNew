@@ -11,6 +11,7 @@ using RepoDb.DbSettings;
 using RepoDb.Enumerations;
 using RepoDb.StatementBuilders;
 using DiningVsCodeNew.Models;
+// using Dapper;
 
 namespace DiningVsCodeNew
 {
@@ -138,6 +139,28 @@ namespace DiningVsCodeNew
             }
             return serveds;
         }
+
+        // public List<HistoryRecord> GetHistoryRecords(int ServedBy)
+        // {
+
+        //     var history = new List<HistoryRecord>();
+        //     using (var connection = new SqlConnection(sett.ConString))
+        //     {
+        //         var parameters = new DynamicParameters(); // Create a DynamicParameters object
+
+        //         // Add the 'CustCodeFilter' parameter to the DynamicParameters
+        //         parameters.Add("@ServedBy", ServedBy);
+
+        //         // Execute the stored procedure with parameters
+        //         history = connection.ExecuteQuery<HistoryRecord>(
+        //             "[dbo].[usp_getHistoryRecords]",
+        //             new { ServedBy = ServedBy }, // Pass the parameters
+        //             commandType: System.Data.CommandType.StoredProcedure
+        //         ).ToList();
+
+        //         return history;
+        //     }
+        // }
         public List<Served> GetServedbyCustomer(int id)
         {
 
@@ -651,18 +674,40 @@ namespace DiningVsCodeNew
             }
             return pymtMains;
         }
-        public List<PaymentByCust> GetPaidPymts()
+        public IQueryable<PaymentByCust> GetPaidPymts()
         {
 
             //var user=new User();
             List<PaymentByCust> paidpymts = new List<PaymentByCust>();
+            // IQueryable paidpymts;
             using (var connection = new SqlConnection(sett.ConString))
             {
                 paidpymts = connection.ExecuteQuery<PaymentByCust>("[dbo].[usp_getPymtByCust]",
-               commandType: System.Data.CommandType.StoredProcedure).ToList();
+                commandType: System.Data.CommandType.StoredProcedure).ToList();
             }
-            return paidpymts;
+            return paidpymts.AsQueryable();
         }
+        public List<PaymentByCust> GetPaidsPymts(string CustCodeFilter)
+        {
+            List<PaymentByCust> paidpymts = new List<PaymentByCust>();
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                // var parameters = new DynamicParameters(); // Create a DynamicParameters object
+
+                // Add the 'CustCodeFilter' parameter to the DynamicParameters
+                // parameters.Add("@CustCodeFilter", CustCodeFilter);
+
+                // Execute the stored procedure with parameters
+                paidpymts = connection.ExecuteQuery<PaymentByCust>(
+                    "[dbo].[usp_getPymtsByCust]",
+                    new { CustCodeFilter = CustCodeFilter }, // Pass the parameters
+                    commandType: System.Data.CommandType.StoredProcedure
+                ).ToList();
+
+                return paidpymts;
+            }
+        }
+
 
         public List<PaymentMain> GetPaidPymtsByCust(string enteredby)
         {
