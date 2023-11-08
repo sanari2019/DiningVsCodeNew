@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< HEAD
-  "dgSpecHash": "rmQz+aprHXlqNF6HEJiF0Y/mLPhrh6mT8397ouBByMUf/tZ1RKCvMF3Wzjme3+4RNNA7xCa4nhShXjiUVFhtZw==",
-=======
-  "dgSpecHash": "Yb5ukfO06RNHQen6gWsj4jKNWUBcX2voiYVV0AY9Iw2xSUJXxMLDaPUcD1x0FAq1GjfIMZkyYZme/A8ol6AX4Q==",
->>>>>>> 7a97e75b7c41694e461d645fff86dfcc33382717
+  "dgSpecHash": "OHXb0VKo5M7qC5LHVjX8kIuJkvNQcjSqcVegKBIvWzL+reQKE7dCm0LIMyHgyK1MkpMmHOeJQhQl5KG0hdciVA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Samuel.anari\\Dinig application\\DiningVsCodeNew\\DiningVsCodeNew\\DiningVsCodeNew.csproj",
   "expectedPackageFiles": [

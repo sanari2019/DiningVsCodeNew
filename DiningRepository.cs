@@ -11,7 +11,7 @@ using RepoDb.DbSettings;
 using RepoDb.Enumerations;
 using RepoDb.StatementBuilders;
 using DiningVsCodeNew.Models;
-// using Dapper;
+
 
 namespace DiningVsCodeNew
 {
@@ -56,6 +56,19 @@ namespace DiningVsCodeNew
             }
             return users;
         }
+        public List<User> GetUserByUsernamePattern(string usernamePattern)
+        {
+            var users = new List<User>();
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+
+                users = connection.ExecuteQuery<User>("[dbo].[usp_getUserByUsernamePattern]", new { UsernamePattern = usernamePattern }, // Pass the parameters
+                            commandType: System.Data.CommandType.StoredProcedure
+                        ).ToList();
+            }
+            return users;
+        }
+
         public User GetUser(int id)
         {
 
@@ -139,28 +152,41 @@ namespace DiningVsCodeNew
             }
             return serveds;
         }
+        public int GetServedMealsCount()
+        {
 
-        // public List<HistoryRecord> GetHistoryRecords(int ServedBy)
-        // {
+            int servedcount = 0;
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                connection.Open();
+                servedcount = connection.ExecuteQuery<int>("SELECT TotalServedMeals FROM ServedMealsCountView").FirstOrDefault();
 
-        //     var history = new List<HistoryRecord>();
-        //     using (var connection = new SqlConnection(sett.ConString))
-        //     {
-        //         var parameters = new DynamicParameters(); // Create a DynamicParameters object
 
-        //         // Add the 'CustCodeFilter' parameter to the DynamicParameters
-        //         parameters.Add("@ServedBy", ServedBy);
+            }
+            return servedcount;
+        }
 
-        //         // Execute the stored procedure with parameters
-        //         history = connection.ExecuteQuery<HistoryRecord>(
-        //             "[dbo].[usp_getHistoryRecords]",
-        //             new { ServedBy = ServedBy }, // Pass the parameters
-        //             commandType: System.Data.CommandType.StoredProcedure
-        //         ).ToList();
+        public List<HistoryRecord> GetHistoryRecords(int ServedBy)
+        {
 
-        //         return history;
-        //     }
-        // }
+            var history = new List<HistoryRecord>();
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                var parameters = new
+                {
+                    @ServedBy = ServedBy,
+                };
+
+                // Execute the stored procedure with parameters
+                history = connection.ExecuteQuery<HistoryRecord>(
+                    "[dbo].[usp_getHistoryRecords]",
+                    new { ServedBy = ServedBy }, // Pass the parameters
+                    commandType: System.Data.CommandType.StoredProcedure
+                ).ToList();
+
+                return history;
+            }
+        }
         public List<Served> GetServedbyCustomer(int id)
         {
 
@@ -169,6 +195,22 @@ namespace DiningVsCodeNew
             {
                 var sql = "SELECT * FROM [dbo].[Served] S inner join paymentmain P on S.paymentmainid=P.id Where isserved=0 and P.enteredby=@id";
                 serveds = connection.ExecuteQuery<Served>(sql, new { id = id }).ToList();
+                // serveds = connection.QueryAll<Served>(e => e.isServed == 0).ToList();
+                foreach (Served sv in serveds)
+                {
+                    sv.paymentMain = connection.Query<PaymentMain>(sv.paymentMainId).FirstOrDefault();
+                }
+            }
+            return serveds;
+        }
+        public List<Served> GetTopNServed(int enteredby)
+        {
+
+            var serveds = new List<Served>();
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                // var sql = "SELECT * FROM [dbo].[Served] S inner join paymentmain P on S.paymentmainid=P.id Where isserved=0 and P.enteredby=@id";
+                serveds = connection.ExecuteQuery<Served>("[dbo].[usp_GetTopNServed]", new { enteredby = enteredby }).ToList();
                 // serveds = connection.QueryAll<Served>(e => e.isServed == 0).ToList();
                 foreach (Served sv in serveds)
                 {
@@ -198,6 +240,68 @@ namespace DiningVsCodeNew
         //     }
         //   return user;
         // }
+
+
+        public List<ServedReportModel> GetServedReport(DateTime startDate, DateTime endDate)
+        {
+            List<ServedReportModel> servedreport = new List<ServedReportModel>();
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                var parameters = new
+                {
+                    StartDate = startDate,
+                    EndDate = endDate
+                };
+
+                servedreport = connection.ExecuteQuery<ServedReportModel>(
+                    "[dbo].[usp_getServedReport]",
+                    parameters,
+                    commandType: System.Data.CommandType.StoredProcedure
+                ).ToList();
+            }
+            return servedreport;
+        }
+
+        public List<UnservedReportModel> GetUnservedReport(DateTime startDate, DateTime endDate)
+        {
+            List<UnservedReportModel> unservedreport = new List<UnservedReportModel>();
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                var parameters = new
+                {
+                    StartDate = startDate,
+                    EndDate = endDate
+                };
+
+                unservedreport = connection.ExecuteQuery<UnservedReportModel>(
+                    "[dbo].[usp_getUnservedReport]",
+                    parameters,
+                    commandType: System.Data.CommandType.StoredProcedure
+                ).ToList();
+            }
+            return unservedreport;
+        }
+        public List<ServedSummaryReportModel> GetServedSummaryReport(DateTime startDate, DateTime endDate)
+        {
+            List<ServedSummaryReportModel> servedsummaryreport = new List<ServedSummaryReportModel>();
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                var parameters = new
+                {
+                    @startDate = startDate,
+                    @endDate = endDate
+                };
+
+                servedsummaryreport = connection.ExecuteQuery<ServedSummaryReportModel>(
+                    "usp_getServedSummaryReport",
+                    parameters,
+                    commandType: System.Data.CommandType.StoredProcedure
+                ).ToList();
+            }
+            return servedsummaryreport;
+        }
+
+
 
     }
     public class OnlinePaymentRepository : BaseRepository<OnlinePayment, SqlConnection>
@@ -262,6 +366,27 @@ namespace DiningVsCodeNew
         //     }
         //   return user;
         // }
+
+        public List<TotalRevenueModel> GetTotalRevenue(DateTime startDate, DateTime endDate)
+        {
+            List<TotalRevenueModel> totalrev = new List<TotalRevenueModel>();
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                var parameters = new
+                {
+                    @startDate = startDate,
+                    @endDate = endDate
+                };
+
+                totalrev = connection.ExecuteQuery<TotalRevenueModel>(
+                    "usp_getTotalRevenue",
+                    parameters,
+                    commandType: System.Data.CommandType.StoredProcedure
+                ).ToList();
+            }
+            return totalrev;
+        }
+
 
     }
 
@@ -470,8 +595,222 @@ namespace DiningVsCodeNew
             }
             return orderedMeals;
         }
+        public List<ServedAlacarteVoucherModel> ExecuteAlacarteOrders(DateTime startdate, DateTime enddate)
+        {
+            List<ServedAlacarteVoucherModel> orderedMeals = new List<ServedAlacarteVoucherModel>();
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                // Define the parameters for the stored procedure
+                var parameters = new
+                {
+                    @startdate = startdate,
+                    @enddate = enddate
+                };
+
+                orderedMeals = connection.ExecuteQuery<ServedAlacarteVoucherModel>(
+                    "[dbo].[usp_getServedAlacarteVoucher]",
+                    parameters, // Pass the parameters
+                    commandType: System.Data.CommandType.StoredProcedure
+                ).ToList();
+            }
+            return orderedMeals;
+        }
+
+
+
 
     }
+
+    public class AvailableMealRepository : BaseRepository<AvailableMeal, SqlConnection>
+    {
+        Setting sett = new Setting();
+
+        public AvailableMealRepository(Setting sett) : base(sett.ConString)
+        {
+            this.sett = sett;
+            DbSettingMapper.Add<SqlConnection>(new SqlServerDbSetting(), true);
+            DbHelperMapper.Add<SqlConnection>(new SqlServerDbHelper(), true);
+            StatementBuilderMapper.Add<SqlConnection>(new SqlServerStatementBuilder(new SqlServerDbSetting()), true);
+        }
+
+        public void InsertAvailableMeal(AvailableMeal availableMeal)
+        {
+            this.Insert(availableMeal);
+        }
+
+        public void UpdateAvailableMeal(AvailableMeal availableMeal)
+        {
+            this.Update(availableMeal);
+        }
+
+        public int DeleteAvailableMeal(AvailableMeal availableMeal)
+        {
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                var sql = "DELETE FROM [dbo].[AvailableMeal] WHERE Id = @Id";
+                int id = connection.ExecuteNonQuery(sql, new { Id = availableMeal.Id });
+                return id;
+            }
+        }
+
+        public List<AvailableMeal> GetAllAvailableMeals()
+        {
+            List<AvailableMeal> availableMeals = new List<AvailableMeal>();
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                availableMeals = connection.QueryAll<AvailableMeal>().ToList();
+            }
+            return availableMeals;
+        }
+
+        public List<AvailableMeal> GetActiveMeals()
+        {
+            List<AvailableMeal> activeMeals = new List<AvailableMeal>();
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                var sql = "SELECT * FROM [dbo].[AvailableMeal] WHERE Active = 1 ORDER BY Id asc";
+                activeMeals = connection.ExecuteQuery<AvailableMeal>(sql).ToList();
+            }
+            return activeMeals;
+        }
+        public List<AvailableMeal> GetInactiveMeals()
+        {
+            List<AvailableMeal> activeMeals = new List<AvailableMeal>();
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                var sql = "SELECT * FROM [dbo].[AvailableMeal] WHERE Active = 0 ORDER BY Id asc";
+                activeMeals = connection.ExecuteQuery<AvailableMeal>(sql).ToList();
+            }
+            return activeMeals;
+        }
+    }
+
+    public class MealActivityRepository : BaseRepository<MealActivity, SqlConnection>
+    {
+        Setting sett = new Setting();
+
+        public MealActivityRepository(Setting sett) : base(sett.ConString)
+        {
+            this.sett = sett;
+            DbSettingMapper.Add<SqlConnection>(new SqlServerDbSetting(), true);
+            DbHelperMapper.Add<SqlConnection>(new SqlServerDbHelper(), true);
+            StatementBuilderMapper.Add<SqlConnection>(new SqlServerStatementBuilder(new SqlServerDbSetting()), true);
+        }
+
+        public void InsertMealActivity(MealActivity mealActivity)
+        {
+            this.Insert(mealActivity);
+        }
+
+        public void UpdateMealActivity(MealActivity mealActivity)
+        {
+            this.Update(mealActivity);
+        }
+
+    }
+
+    public class TransferRepository : BaseRepository<Transfer, SqlConnection>
+    {
+        Setting sett = new Setting();
+
+        public TransferRepository(Setting sett) : base(sett.ConString)
+        {
+            this.sett = sett;
+            DbSettingMapper.Add<SqlConnection>(new SqlServerDbSetting(), true);
+            DbHelperMapper.Add<SqlConnection>(new SqlServerDbHelper(), true);
+            StatementBuilderMapper.Add<SqlConnection>(new SqlServerStatementBuilder(new SqlServerDbSetting()), true);
+        }
+
+        public void InsertTransfer(Transfer transfer)
+        {
+            this.Insert(transfer);
+        }
+
+        public void UpdateTransfer(Transfer transfer)
+        {
+            this.Update(transfer);
+        }
+
+        public void CompleteTransaction(PaymentMain updatedPaymentMain, PaymentMain newPaymentMain, Transfer newTransfer)
+
+        {
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        // Step 1: Update the existing PaymentMain
+                        var paymentMainRepository = new PaymentMainRepository(sett);
+                        paymentMainRepository.updatePaymentMain(updatedPaymentMain);
+
+                        // Step 2: Insert the new PaymentMain
+                        newPaymentMain.Id = 0; // Ensure it's a new record
+                        paymentMainRepository.insertPaymentMain(newPaymentMain);
+
+                        // Step 3: Insert the new Transfer
+                        var transferRepository = new TransferRepository(sett);
+                        transferRepository.InsertTransfer(newTransfer);
+
+                        // Commit the transaction if everything is successful
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        // Handle exceptions or errors
+                        transaction.Rollback();
+                        throw; // Re-throw the exception
+                    }
+                }
+            }
+        }
+
+
+        public void CompleteTransaction2(PaymentMain updatedPaymentMain, PaymentMain newPaymentMain, Transfer newTransfer)
+        {
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        PaymentMainRepository paymentMainRepository = new PaymentMainRepository(sett);
+                        TransferRepository transferRepository = new TransferRepository(sett);
+
+
+                        // Step 2: Insert the new PaymentMain
+                        paymentMainRepository.insertPaymentMain(newPaymentMain);
+                        transferRepository.InsertTransfer(newTransfer);
+
+
+
+                        updatedPaymentMain.Unit -= newPaymentMain.Unit;
+                        paymentMainRepository.updatePaymentMain(updatedPaymentMain);
+
+
+                        // Step 3: Update the newTransfer with the newly created PaymentMain's ID
+                        // newTransfer.S_PymtMainId = updatedPaymentMain.Id;
+                        // newTransfer.R_PymtMainId = newPaymentMain.Id;
+
+                        // Commit the transaction if everything is successful
+                        transaction.Commit();
+                    }
+                    catch (Exception)
+                    {
+                        // Handle exceptions or errors
+                        transaction.Rollback();
+                        throw; // Re-throw the exception
+                    }
+                }
+            }
+        }
+
+    }
+
+
+
 
     public class MenuRepository : BaseRepository<Menu, SqlConnection>
     {
@@ -662,6 +1001,18 @@ namespace DiningVsCodeNew
                 return deletedrows;
             }
         }
+
+        public PaymentMain GetPymt(int id)
+        {
+
+            var pymt = new PaymentMain();
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+
+                pymt = connection.Query<PaymentMain>(id).FirstOrDefault();
+            }
+            return pymt;
+        }
         public List<PaymentMain> GetPymtMains()
         {
 
@@ -709,6 +1060,17 @@ namespace DiningVsCodeNew
         }
 
 
+        public List<PaymentMain> GetTopNPaidPymtsForCust(string enteredby)
+        {
+
+            List<PaymentMain> paidpymts = new List<PaymentMain>();
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                paidpymts = connection.ExecuteQuery<PaymentMain>("[dbo].[usp_getTopNPaidPaymentsForUser]",
+              new { enteredby = enteredby }, commandType: System.Data.CommandType.StoredProcedure).ToList();
+            }
+            return paidpymts;
+        }
         public List<PaymentMain> GetPaidPymtsByCust(string enteredby)
         {
 
@@ -720,6 +1082,8 @@ namespace DiningVsCodeNew
             }
             return paidpymts;
         }
+
+
 
 
 
@@ -891,7 +1255,20 @@ namespace DiningVsCodeNew
 
     }
 
+    public class FeedbackRepository : BaseRepository<Feedback, SqlConnection>
+    {
+        public FeedbackRepository(Setting sett) : base(sett.ConString)
+        {
+            DbSettingMapper.Add<SqlConnection>(new SqlServerDbSetting(), true);
+            DbHelperMapper.Add<SqlConnection>(new SqlServerDbHelper(), true);
+            StatementBuilderMapper.Add<SqlConnection>(new SqlServerStatementBuilder(new SqlServerDbSetting()), true);
+        }
 
+        public void InsertFeedback(Feedback feedback)
+        {
+            this.Insert(feedback);
+        }
+    }
 }
 
 

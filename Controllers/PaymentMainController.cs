@@ -55,10 +55,21 @@ public class PaymentMainController : ControllerBase
         return Ok(paidPymts);
 
     }
+
+    [HttpGet("getpymt/{id}")]
+    public async Task<ActionResult<PaymentMain>> GetPymt(int id)
+    {
+        return new OkObjectResult(RepPymtMain.GetPymt(id));
+    }
     [HttpPost("getpaidpymtsbyCust")]
     public async Task<ActionResult<IEnumerable<PaymentMain>>> GetPaidPaymentsbyCust([FromBody] User us)
     {
         return RepPymtMain.GetPaidPymtsByCust(us.id.ToString());
+    }
+    [HttpPost("gettopnpaidpymtsforCust")]
+    public async Task<ActionResult<IEnumerable<PaymentMain>>> GetTopNPaidPaymentsforCust([FromBody] User us)
+    {
+        return RepPymtMain.GetTopNPaidPymtsForCust(us.id.ToString());
     }
 
     [HttpPost("updatepayment")]

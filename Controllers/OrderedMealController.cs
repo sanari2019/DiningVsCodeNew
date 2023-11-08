@@ -29,6 +29,14 @@ public class OrderedMealController : ControllerBase
     {
         return ordMeal.GetPaidOrderedMeals(pymtmain);
     }
+
+    // GET: api/OrderedMeal/AlacarteOrders
+    [HttpGet("AlacarteOrders")]
+    public ActionResult<IEnumerable<ServedAlacarteVoucherModel>> GetAlacarteOrders([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+    {
+        var alacarteOrders = ordMeal.ExecuteAlacarteOrders(startDate, endDate);
+        return Ok(alacarteOrders);
+    }
     // PUT: api/users/5
     // To protect from overposting attacks, see https://go.microsoft.com/
     // fwlink/?linkid=2123754

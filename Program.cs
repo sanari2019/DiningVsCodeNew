@@ -56,13 +56,15 @@ builder.Services.AddSingleton<OrderedMealRepository>();
 builder.Services.AddSingleton<OnlinePaymentRepository>();
 builder.Services.AddSingleton<ServedRepository>();
 builder.Services.AddSingleton<CustomerRouteRepository>();
-<<<<<<< HEAD
 builder.Services.AddSingleton<MealtariffRepository>();
 builder.Services.AddSingleton<SieveProcessor>();
 builder.Services.AddScoped<ISieveProcessor, SieveProcessor>();
-=======
 builder.Services.AddSingleton<SieveProcessor>();
->>>>>>> 7a97e75b7c41694e461d645fff86dfcc33382717
+builder.Services.AddSingleton<AvailableMealRepository>();
+builder.Services.AddSingleton<MealActivityRepository>();
+builder.Services.AddSingleton<TransferRepository>();
+builder.Services.AddSingleton<FeedbackRepository>();
+
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 builder.Services.AddCors(options =>
 {

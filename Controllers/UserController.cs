@@ -32,6 +32,16 @@ public class UserController : ControllerBase
         return new OkObjectResult(repuser.GetUser(id));
 
     }
+    [HttpGet("getfiltuser")]
+    public IActionResult GetUserByUsernamePattern([FromQuery] string usernamePattern)
+
+    {
+
+
+        var filtUser = repuser.GetUserByUsernamePattern(usernamePattern);
+        return Ok(filtUser);
+
+    }
 
     [HttpGet("getuser/{userName}")]
     public async Task<ActionResult<User>> GetUser(string username)

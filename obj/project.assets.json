@@ -8286,11 +8286,7 @@
     ]
   },
   "packageFolders": {
-<<<<<<< HEAD
     "C:\\Users\\Samuel.anari\\.nuget\\packages\\": {}
-=======
-    "C:\\Users\\olusola.omotoso\\.nuget\\packages\\": {}
->>>>>>> 7a97e75b7c41694e461d645fff86dfcc33382717
   },
   "project": {
     "version": "1.0.0",
@@ -8302,20 +8298,13 @@
       "outputPath": "C:\\Users\\Samuel.anari\\Dinig application\\DiningVsCodeNew\\DiningVsCodeNew\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-<<<<<<< HEAD
         "C:\\Users\\Samuel.anari\\AppData\\Roaming\\NuGet\\NuGet.Config"
-=======
-        "C:\\Users\\olusola.omotoso\\AppData\\Roaming\\NuGet\\NuGet.Config"
->>>>>>> 7a97e75b7c41694e461d645fff86dfcc33382717
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-<<<<<<< HEAD
-        "C:\\Program Files\\dotnet\\sdk\\7.0.308\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
-=======
->>>>>>> 7a97e75b7c41694e461d645fff86dfcc33382717
+        "C:\\Program Files\\dotnet\\sdk\\7.0.310\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -8398,7 +8387,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.308\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.310\\RuntimeIdentifierGraph.json"
       }
     }
   },

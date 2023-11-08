@@ -51,26 +51,32 @@ public class ServedController : ControllerBase
         return new OkObjectResult(repserv.GetServed(id));
 
     }
-    // [HttpGet("getHistoryRecords/{ServedBy}")]
-    // public IActionResult GetHistoryRecords(int ServedBy)
+
+    // [HttpGet("{getTopNServed")]
+    // public async Task<ActionResult<IEnumerable<Served>>> GetTopNServed([FromBody] User us)
     // {
-    //     try
-    //     {
-    //         var historyRecords = repserv.GetHistoryRecords(ServedBy);
-
-    //         if (historyRecords == null)
-    //         {
-    //             return NotFound(); // Return a 404 Not Found response if no records are found
-    //         }
-
-    //         return Ok(historyRecords); // Return a 200 OK response with the history records
-    //     }
-    //     catch (Exception ex)
-    //     {
-    //         // Handle any exceptions or errors here
-    //         return StatusCode(500, $"Internal Server Error: {ex.Message}");
-    //     }
+    //     return repserv.GetTopNServed(us.id);
     // }
+    [HttpGet("getHistoryRecords/{ServedBy}")]
+    public IActionResult GetHistoryRecords(int ServedBy)
+    {
+        try
+        {
+            var historyRecords = repserv.GetHistoryRecords(ServedBy);
+
+            if (historyRecords == null)
+            {
+                return NotFound(); // Return a 404 Not Found response if no records are found
+            }
+
+            return Ok(historyRecords); // Return a 200 OK response with the history records
+        }
+        catch (Exception ex)
+        {
+            // Handle any exceptions or errors here
+            return StatusCode(500, $"Internal Server Error: {ex.Message}");
+        }
+    }
 
 
     [HttpPost("{id}")]
@@ -125,5 +131,33 @@ public class ServedController : ControllerBase
     // {
     // return _context.States.Any(e => e.Id == id);
     // }
+
+    [HttpGet("ServedReport")]
+    public ActionResult<IEnumerable<ServedReportModel>> GetServedReport([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+    {
+        var servedReport = repserv.GetServedReport(startDate, endDate);
+        return Ok(servedReport);
+    }
+    [HttpGet("UnservedReport")]
+    public ActionResult<IEnumerable<UnservedReportModel>> GetUnservedReport([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+    {
+        var unservedReport = repserv.GetUnservedReport(startDate, endDate);
+        return Ok(unservedReport);
+    }
+    [HttpGet("ServedSummaryReport")]
+    public ActionResult<IEnumerable<ServedSummaryReportModel>> GetServedSummaryReport([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+    {
+        var servedSummaryReport = repserv.GetServedSummaryReport(startDate, endDate);
+        return Ok(servedSummaryReport);
+    }
+
+    [HttpGet("ServedMealsCount")]
+    public ActionResult<int> GetServedMealsCount()
+    {
+        int servedcount = repserv.GetServedMealsCount();
+        return Ok(servedcount);
+    }
+
+
 
 }

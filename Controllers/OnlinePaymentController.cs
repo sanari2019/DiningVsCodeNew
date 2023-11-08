@@ -106,5 +106,12 @@ public class OnlinePaymentController : ControllerBase
     // {
     // return _context.States.Any(e => e.Id == id);
     // }
+    [HttpGet("TotalRevenue")]
+    public ActionResult<IEnumerable<TotalRevenueModel>> GetTotalRevenue([FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
+    {
+        var totalRevenue = reponlinePayment.GetTotalRevenue(startDate, endDate);
+        return Ok(totalRevenue);
+    }
+
 
 }
