@@ -387,6 +387,20 @@ namespace DiningVsCodeNew
             return totalrev;
         }
 
+        public OnlinePayment GetOnlinePaymentByRefNo(string transRefNo)
+        {
+
+            OnlinePayment onlinePayment = new OnlinePayment();
+
+            using (var connection = new SqlConnection(sett.ConString))
+            {
+                var query = "SELECT * FROM [OnlinePayment] WHERE TransRefNo = @TransRefNo";
+                onlinePayment = connection.ExecuteQuery<OnlinePayment>(query, new { TransRefNo = transRefNo }).FirstOrDefault();
+            }
+
+            return onlinePayment;
+        }
+
 
     }
 

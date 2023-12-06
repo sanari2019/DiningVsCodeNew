@@ -2,12 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using DiningVsCodeNew.Models; // Import your model
-using DiningVsCodeNew; // Import your repository
+using DiningVsCodeNew;
+using Microsoft.AspNetCore.Cors; // Import your repository
 
 namespace DiningVsCodeNew.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [EnableCors("MyAllowSpecificOrigins")]
     public class TransferController : ControllerBase
     {
         private readonly TransferRepository transferRepo;

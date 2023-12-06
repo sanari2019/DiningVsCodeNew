@@ -10,13 +10,15 @@ public class OnlinePaymentController : ControllerBase
 {
     private OnlinePaymentRepository reponlinePayment;
     private UserRepository repuser;
+    private PaymentMainRepository _pymtmain;
     int idvalue = 0;
     private EmailConfiguration _emailConfig;
-    public OnlinePaymentController(OnlinePaymentRepository reponlinePymt, EmailConfiguration emailConfig, UserRepository repUser)
+    public OnlinePaymentController(OnlinePaymentRepository reponlinePymt, EmailConfiguration emailConfig, UserRepository repUser, PaymentMainRepository pymtmain)
     {
         this.reponlinePayment = reponlinePymt;
         this._emailConfig = emailConfig;
         this.repuser = repUser;
+        this._pymtmain = pymtmain;
     }
     // GET: api/Cities
     [HttpGet]
@@ -67,8 +69,14 @@ public class OnlinePaymentController : ControllerBase
     // POST: api/Cities
     // To protect from overposting attacks, see https://go.microsoft.com/
     //fwlink /? linkid = 2123754
+
+    public class OnlinePaymentDto
+    {
+        public OnlinePayment OnlinePaymentData { get; set; }
+        public PaymentMain PaymentMainData { get; set; }
+    }
     [HttpPost]
-    public async Task<ActionResult<OnlinePayment>> PostOnlinePayment(OnlinePayment onlinePymt)
+    public async Task<ActionResult<OnlinePaymentDto>> PostOnlinePayment(int id, OnlinePayment onlinePymt)
     {
 
         if (onlinePymt != null)
@@ -113,5 +121,16 @@ public class OnlinePaymentController : ControllerBase
         return Ok(totalRevenue);
     }
 
+    // GET: api/OnlinePayment/GetOnlinePaymentByRefNo/{transRefNo}
+    [HttpGet("GetOnlinePaymentByRefNo/{transRefNo}")]
+    public ActionResult<OnlinePayment> GetOnlinePaymentByRefNo(string transRefNo)
+    {
+        var onlinePayment = reponlinePayment.GetOnlinePaymentByRefNo(transRefNo);
+        if (onlinePayment == null)
+        {
+            return NotFound();
+        }
+        return Ok(onlinePayment);
+    }
 
 }

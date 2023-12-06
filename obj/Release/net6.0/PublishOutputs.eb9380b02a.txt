@@ -42,6 +42,7 @@ C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\System.Drawing.Common.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\System.IdentityModel.Tokens.Jwt.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\System.Linq.Async.dll
+C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\System.Net.WebSockets.WebSocketProtocol.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\System.Runtime.Caching.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\System.Security.Cryptography.ProtectedData.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\publish\System.Security.Permissions.dll

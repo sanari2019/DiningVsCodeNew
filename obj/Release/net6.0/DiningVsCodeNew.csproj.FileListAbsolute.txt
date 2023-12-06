@@ -176,3 +176,4 @@ C:\Users\olusola.omotoso\Documents\Angular\DiningVsCodeNew\bin\Release\net6.0\pu
 >>>>>>> d1d611de4491d09b3979748e59a366da524225ce
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Release\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Release\net6.0\Sieve.dll
+C:\Users\Samuel.anari\Dinig application\DiningVsCodeNew\DiningVsCodeNew\bin\Release\net6.0\System.Net.WebSockets.WebSocketProtocol.dll
